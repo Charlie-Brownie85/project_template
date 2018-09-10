@@ -1,0 +1,55 @@
+// SCSS generated Flexbox Grid System (mobile first approach):
+// Based on:
+// https://github.com/kristoferjoseph/flexboxgrid
+// https://github.com/evgenyrodionov/flexboxgrid2
+// https://github.com/hugeinc/flexboxgrid-sass
+
+@import './_flexboxgrid-mixin';
+
+$grid-columns: 12 !default;
+$columns-spacing: 30px !default; // Either % or fixed sized
+
+$col-prefix: 'col-';
+$col-name: xs; // Initial -> Mobile first
+$size-breakpoints:
+sm 768px,
+md 992px,
+lg 1200px !default;
+
+$columns-spacing-compensation: $columns-spacing * .5 * -1;
+$half-columns-spacing: $columns-spacing * .5;
+
+.stark-row {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: $columns-spacing-compensation;
+    margin-left: $columns-spacing-compensation;
+
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+
+    &--no_spacing {
+        margin-right: 0;
+        margin-left: 0;
+
+        > [class*='col-'] {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+// First call is out of the loop to build default classes outside of @media queries. (Mobile first -> xs) 
+@include generate-col-classes($grid-columns, $columns-spacing, $col-prefix, $col-name);
+
+@each $breakpoint in $size-breakpoints {
+    $col-name: nth($breakpoint, 1);
+    $width: nth($breakpoint, 2);
+    @media screen and (min-width: $width) {
+        @include generate-col-classes($grid-columns, $columns-spacing, $col-prefix, $col-name);
+    }
+}

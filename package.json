@@ -1,0 +1,23 @@
+{
+  "name": "project_name",
+  "version": "1.0.0",
+  "description": "Empty project template",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "empty project",
+    "template"
+  ],
+  "author": "Carlos Orbea",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^9.1.5",
+    "browser-sync": "^2.24.7",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4"
+  }
+}

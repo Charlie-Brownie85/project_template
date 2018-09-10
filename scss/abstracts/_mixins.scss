@@ -1,0 +1,48 @@
+// Create mediaquery for breakpoint given. [Rule optional]
+// ----------------------------------------------------------------------------
+// @optional {map}  $breakpoints  Map with breakpoints names and values is required if param is key
+// Args:
+// @param {any}  $breakpoint: breakpoint to define the media query. It accepts 'numbers' with and without
+//                            units (px will be asigned if unitless) or 'key' within a previous $breakpoints
+//                            map defined (see @optional), or variables previously defined.
+// @param {string}   $rule:   defines if it will be a max-width or min-width mediaquery. (Default: max)
+// @param {string}   $dimension:   defines if it will be a width or height mediaquery. (Default: width)
+@mixin media($breakpoint, $rule: 'max', $dimension: 'width') {
+  $rules: 'max', 'min';
+  $dimensions: 'width', 'height';
+  $units: 'px', 'em', 'rem', '%', 'vw', 'vh';
+  @if index($rules, $rule) == null {
+    $rule: 'max';
+  }
+  @if index($dimensions, $dimension) == null {
+    $rule: 'width';
+  }
+
+  @if type-of($breakpoint)==number {
+    @if unitless($breakpoint) {
+      @media screen and (#{$rule}-#{$dimension}: #{$breakpoint + 'px'}) {
+        @content;
+      }
+    }@else if index($units, unit($breakpoint)) != null {
+      @media screen and (#{$rule}-#{$dimension}: #{$breakpoint}) {
+        @content;
+      }
+    }@else {
+      @error "Invalid units provided";
+    }
+  }@else if variable_exists(breakpoints){
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media screen and (#{$rule}-#{$dimension}: #{inspect(map-get($breakpoints, $breakpoint))}) {
+        @content;
+      }
+    }@else {
+       @error "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "+"Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+  }@else if variable_exists($breakpoint){
+    @media screen and (#{$rule}-#{$dimension}: #{$breakpoint}) {
+      @content;
+    }
+  }@else {
+    @error "Neither $breakpoints map nor variable provided are defined";
+  }
+}

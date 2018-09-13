@@ -4,7 +4,8 @@
   "description": "Empty project template",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "gulp build"
   },
   "keywords": [
     "empty project",
@@ -19,8 +20,5 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4"
-  },
-  "scripts": {
-    "build": "gulp build"
   }
 }

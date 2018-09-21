@@ -5,10 +5,11 @@
 // @param {string}  $col-prefix: prefix for every 'col-' class name.
 // @param {string}  $col-name: sufix for every 'col-' class name.
 @mixin generate-col-classes($num, $columns-spacing, $col-prefix, $col-name) {
+  $col-prefix: '.' + $col-prefix + '-';
   $columns-spacing-compensation: $columns-spacing * .5 * -1;
   $half-columns-spacing: $columns-spacing * .5;
 
-  $selector: $col-prefix+ $col-name + ',';
+  $selector: $col-prefix + $col-name + ',';
 
   @for $i from 1 through $num {
       $selector: $selector + $col-prefix + $col-name + '-' + $i + ', ' + $col-prefix + $col-name + '--off-' + $i + ', ';

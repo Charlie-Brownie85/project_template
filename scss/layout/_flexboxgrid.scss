@@ -9,7 +9,7 @@
 $grid-columns: 12 !default;
 $columns-spacing: 30px !default; // Either % or fixed sized
 
-$col-prefix: 'col-';
+$col-prefix: 'col';
 $col-name: xs; // Initial -> Mobile first
 $size-breakpoints:
 sm 768px,

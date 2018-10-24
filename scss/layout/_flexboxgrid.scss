@@ -19,7 +19,7 @@ lg 1200px !default;
 $columns-spacing-compensation: $columns-spacing * .5 * -1;
 $half-columns-spacing: $columns-spacing * .5;
 
-.stark-row {
+.row {
     box-sizing: border-box;
     display: flex;
     flex: 0 1 auto;

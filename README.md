@@ -4,7 +4,13 @@ Basic template for non-angular projects. It contains:
 
   - sass 7-1 pattern folder structure
   - sass mixins and flexboxgrid utilities
-  - gulp tasks for:
+  - Webpack bundling for:
     - sass compiling
+    - scss sourcemaps
+    - css autoprefixer
+    - css minify
+    - js babel down compilation to es2015
+    - js bundling
+    - js uglify & minify
     - live browser feeding on file save for preview on localhost
     - copy files into dist/ folder

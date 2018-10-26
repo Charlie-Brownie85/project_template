@@ -6,18 +6,35 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/dist'
+        // publicPath: '/dist'
     },
     module: {
-        rules: [{
-            test: /\.html$/,
-            use: [{
-                loader: 'html-loader',
-                options: {
-                    minimize: true
-                }
-            }]
-        }]
+        rules: [
+            {
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        minimize: false // just for debugging
+                    }
+                }]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                        options: {
+                            sourceMap: true,
+                            convertToAbsoluteUrls: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ]
+            }
+        ]
     },
     plugins: [
         new HtmlWebPackPlugin({

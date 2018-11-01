@@ -1,0 +1,24 @@
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+// ! This is only for test purposes
+// TODO: Delete this after tests
+
+.greetings {
+  font-size: 40px;
+  font-weight: bold;
+  color: #8d0606;
+}

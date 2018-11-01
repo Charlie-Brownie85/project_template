@@ -1,0 +1,138 @@
+// Create mediaquery for breakpoint given. [Rule optional]
+// ----------------------------------------------------------------------------
+// @optional {map}  $breakpoints  Map with breakpoints names and values is required if param is key
+// Args:
+// @param {any}  $breakpoint: breakpoint to define the media query. It accepts 'numbers' with and without
+//                            units (px will be asigned if unitless) or 'key' within a previous $breakpoints
+//                            map defined (see @optional), or variables previously defined.
+// @param {string}   $rule:   defines if it will be a max-width or min-width mediaquery. (Default: max)
+// @param {string}   $dimension:   defines if it will be a width or height mediaquery. (Default: width)
+@mixin media($breakpoint, $rule: 'max', $dimension: 'width') {
+  $rules: 'max', 'min';
+  $dimensions: 'width', 'height';
+  $units: 'px', 'em', 'rem', '%', 'vw', 'vh';
+  @if index($rules, $rule) == null {
+    $rule: 'max';
+  }
+  @if index($dimensions, $dimension) == null {
+    $rule: 'width';
+  }
+
+  @if type-of($breakpoint)==number {
+    @if unitless($breakpoint) {
+      @media screen and (#{$rule}-#{$dimension}: #{$breakpoint + 'px'}) {
+        @content;
+      }
+    }@else if index($units, unit($breakpoint)) != null {
+      @media screen and (#{$rule}-#{$dimension}: #{$breakpoint}) {
+        @content;
+      }
+    }@else {
+      @error "Invalid units provided";
+    }
+  }@else if variable_exists(breakpoints){
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media screen and (#{$rule}-#{$dimension}: #{inspect(map-get($breakpoints, $breakpoint))}) {
+        @content;
+      }
+    }@else {
+       @error "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "+"Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+  }@else if variable_exists($breakpoint){
+    @media screen and (#{$rule}-#{$dimension}: #{$breakpoint}) {
+      @content;
+    }
+  }@else {
+    @error "Neither $breakpoints map nor variable provided are defined";
+  }
+}
+
+
+//
+// ----------------------------------------------------------------------------
+//
+// Fluid % width classes generator:
+// --------------------------------
+//
+// Creates as many 'width' classes as defined by the arguments of the mixin as follows:
+// .width10 {width: 10%;}
+// .width20 {width: 20%;}
+// .width30 {width: 30%;}
+// ...
+// Args:
+// $max: number indicating the max width / last class to be built
+// $step: number indicating the step or same-distant classes to be built
+
+@mixin widthClasses($max, $step){
+  @for $i from 1 through floor($max/$step){
+    $i : $i * $step;
+    .width#{$i}{
+      width: percentage($i/$max);
+    }
+  }
+}
+
+
+///
+/// Viewport sized typography with minimum and maximum values
+///
+/// @author Eduardo Boucas (@eduardoboucas)
+///
+/// @param {Number}   $responsive  - Viewport-based size
+/// @param {Number}   $min         - Minimum font size (px)
+/// @param {Number}   $max         - Maximum font size (px)
+///                                  (optional)
+/// @param {Number}   $fallback    - Fallback for viewport-
+///                                  based units (optional)
+///
+/// @example scss - 5vw font size (with 50px fallback), 
+///                 minumum of 35px and maximum of 150px
+///  @include responsive-font(5vw, 35px, 150px, 50px);
+///
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+  
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+  
+  @if $max {
+    $max-breakpoint: $max / $responsive-unitless * 100;
+    
+    @media (min-#{$dimension}: #{$max-breakpoint}) {
+      font-size: $max;
+    }
+  }
+  
+  @if $fallback {
+    font-size: $fallback;
+  }
+  
+  font-size: $responsive;
+}
+
+
+// ----------------------------------------------------------------------------
+//
+// Keep aspect ratio on responsive:
+// --------------------------------
+//
+// Using the pseudoelement and padding hack to maintain same proportion of the element
+// when resizing.
+// Args:
+// @param {Number}  $ratio-or-width: specifies either the width or the aspect ratio to keep
+// @param {Number}  $height: if specified, it will be used with the previous argument to calculate the aspect ratio
+// 
+
+@mixin aspect-ratio($ratio-or-width, $height: null) {
+  position: relative;
+  $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: $padding;
+  }
+}

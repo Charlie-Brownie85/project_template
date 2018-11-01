@@ -1,4 +1,3 @@
-import '../css/style.css';
 
 var callback = () => {
     const now = new Date();

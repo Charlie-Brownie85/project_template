@@ -5,7 +5,7 @@
 @import './abstracts/mixins';
 // Base
 @import './base/reset';
-@import './base/typography';
+// @import './base/typography'; // ! Ommited until assets management addressed with webpack
 @import './base/helpers';
 // Components
 // Layout

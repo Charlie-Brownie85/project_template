@@ -6,11 +6,11 @@ Basic template for non-angular projects. It contains:
   - sass mixins and flexboxgrid utilities
   - Webpack bundling for:
     - sass compiling
-    - scss sourcemaps
-    - css autoprefixer
-    - css minify
-    - js babel down compilation to es2015
+    - scss sourcemaps (pending)
+    - css autoprefixer (pending)
+    - css minify (pending)
+    - js babel down compilation to es5
     - js bundling
     - js uglify & minify
-    - live browser feeding on file save for preview on localhost
+    - live browser feeding on file save for preview on localhost (pending)
     - copy files into dist/ folder

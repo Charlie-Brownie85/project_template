@@ -12,5 +12,5 @@ Basic template for non-angular projects. It contains:
     - js babel down compilation to es5
     - js bundling
     - js uglify & minify
-    - live browser feeding on file save for preview on localhost (pending)
+    - live browser feeding on file save for preview on localhost
     - copy files into dist/ folder

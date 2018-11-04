@@ -7,7 +7,7 @@ Basic template for non-angular projects. It contains:
   - Webpack bundling for:
     - sass compiling
     - scss sourcemaps (pending)
-    - css autoprefixer (pending)
+    - css autoprefixer
     - css minify (pending)
     - js babel down compilation to es5
     - js bundling

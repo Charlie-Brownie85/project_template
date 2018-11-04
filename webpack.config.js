@@ -45,6 +45,16 @@ module.exports = {
                         }
                     },
                     {
+                        loader: 'postcss-loader',
+                        options: {
+                            indent: 'postcss',
+                            sourceMap: true,
+                            plugins: [
+                                require('autoprefixer')
+                            ]
+                        }
+                    },
+                    {
                         loader: 'sass-loader',
                         options: {sourceMap: true}
                     }

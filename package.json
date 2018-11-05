@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "webpack-dev-server --open",
+    "start": "npm run clean && webpack --mode=development && webpack-dev-server --open",
     "watch": "webpack --watch --mode development",
-    "build": "webpack --mode production"
+    "build": "npm run clean && webpack --mode=production",
+    "clean": "rimraf ./dist"
   },
   "keywords": [
     "empty project",
@@ -28,6 +29,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",
     "postcss-loader": "^3.0.0",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.23.1",

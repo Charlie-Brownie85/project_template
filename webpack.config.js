@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
-    mode: 'development',
+
+module.exports = (env, argv) => ({
+    mode: argv.mode,
     entry: ['./src/js/main.js', './src/scss/main.scss'],
     devServer: {
         contentBase: './dist'
@@ -41,19 +43,17 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true,
-                            minimize: process.env.NODE_ENV === 'production',
+                            sourceMap: true
                         }
                     },
                     {
                         loader: 'postcss-loader',
-                        options: {
-                            indent: 'postcss',
-                            sourceMap: true,
-                            plugins: [
-                                require('autoprefixer')
-                            ]
-                        }
+                        // TODO: pass env variable for PROD and DEV
+                        // options: {
+                        //     config: {
+                        //         ctx: { env: this.mode }
+                        //     }
+                        // }
                     },
                     {
                         loader: 'sass-loader',
@@ -64,6 +64,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({}),
         new HtmlWebPackPlugin({
             template: 'src/index.html',
             filename: './index.html'
@@ -72,4 +73,4 @@ module.exports = {
             filename: 'css/style.css'
         })
     ]
-};
+});

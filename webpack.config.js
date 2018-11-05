@@ -12,6 +12,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/main.js'
     },
+    devtool: 'cheap-module-source-map',
     module: {
         rules: [
             {

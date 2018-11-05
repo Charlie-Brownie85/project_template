@@ -49,11 +49,9 @@ module.exports = (env, argv) => ({
                     {
                         loader: 'postcss-loader',
                         // TODO: pass env variable for PROD and DEV
-                        // options: {
-                        //     config: {
-                        //         ctx: { env: this.mode }
-                        //     }
-                        // }
+                        options: {
+                            sourceMap: true,
+                        }
                     },
                     {
                         loader: 'sass-loader',

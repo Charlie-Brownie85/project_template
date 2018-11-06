@@ -7,7 +7,7 @@
     "test": "test",
     "start": "npm run clean && webpack --mode development && webpack-dev-server --open",
     "watch": "webpack --watch --mode development",
-    "build": "npm run clean && webpack --mode production",
+    "build": "npm run clean && webpack -p --mode production",
     "clean": "rimraf ./dist"
   },
   "keywords": [

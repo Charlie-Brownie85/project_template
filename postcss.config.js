@@ -3,7 +3,6 @@ module.exports = ({ file, options, env }) => ({
     sourceMap: true,
     plugins: {
         'autoprefixer': {},
-        // 'cssnano': env === 'production' ? {} : false
-        'cssnano': {}
+        'cssnano': env === 'production' ? {} : false,
     }
 });

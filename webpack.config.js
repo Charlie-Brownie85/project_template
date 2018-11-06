@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 module.exports = (env, argv) => ({
     mode: argv.mode,
     entry: ['./src/js/main.js', './src/scss/main.scss'],
@@ -51,6 +50,12 @@ module.exports = (env, argv) => ({
                         // TODO: pass env variable for PROD and DEV
                         options: {
                             sourceMap: true,
+                            config: {
+                                path: './postcss.config.js',
+                                ctx: {
+                                    env: this.mode
+                                }
+                            },
                         }
                     },
                     {

@@ -2,9 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => ({
-    mode: argv.mode,
+    mode: argv.mode || process.env.mode || process.env.NODE_ENV || 'development',
     entry: ['./src/js/main.js', './src/scss/main.scss'],
     devServer: {
         contentBase: './dist'
@@ -52,21 +53,34 @@ module.exports = (env, argv) => ({
                             sourceMap: true,
                             config: {
                                 path: './postcss.config.js',
-                                ctx: {
-                                    env: this.mode
-                                }
+                                ctx: { env: this.mode }
                             },
                         }
                     },
                     {
                         loader: 'sass-loader',
-                        options: {sourceMap: true}
+                        options: { sourceMap: true }
                     }
                 ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'fonts/[name].[ext]',
+                    }
+                },
             }
         ]
     },
     plugins: [
+        new CopyWebpackPlugin([
+            {
+                from: './src/assets/fonts',
+                to: 'assets/fonts'
+            },
+        ]),
         new webpack.DefinePlugin({}),
         new HtmlWebPackPlugin({
             template: 'src/index.html',

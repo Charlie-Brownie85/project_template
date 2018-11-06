@@ -8,10 +8,10 @@ Basic template for non-angular projects. It contains:
     - sass compiling
     - scss sourcemaps
     - css autoprefixer
-    - css minify
+    - css minify on PROD
     - js babel down compilation to es5
     - js bundling
-    - js uglify & minify
+    - js uglify & minify on PROD
     - live browser feeding on file save for preview on localhost
     - copy files into dist/ folder
-    - Handle and copy asset files: fonts, images, ... (pending)
+    - Handle and copy asset files: fonts, images, ... 

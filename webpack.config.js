@@ -32,7 +32,7 @@ module.exports = (env, argv) => ({
                 use: [{
                     loader: 'html-loader',
                     options: {
-                        minimize: false // just for debugging
+                        minimize: argv.mode === 'production' ? true : false
                     }
                 }]
             },
@@ -53,7 +53,7 @@ module.exports = (env, argv) => ({
                             sourceMap: true,
                             config: {
                                 path: './postcss.config.js',
-                                ctx: { env: this.mode }
+                                ctx: { env: argv.mode }
                             },
                         }
                     },

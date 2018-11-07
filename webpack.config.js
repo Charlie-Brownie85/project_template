@@ -12,6 +12,7 @@ module.exports = (env, argv) => ({
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
         filename: 'js/main.js'
     },
     devtool: 'cheap-module-source-map',
@@ -69,7 +70,7 @@ module.exports = (env, argv) => ({
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        publicPath: '../assets/fonts/'
+                        outputPath: 'assets/fonts/'
                     }
                 },
             }

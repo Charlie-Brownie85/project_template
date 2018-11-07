@@ -68,7 +68,8 @@ module.exports = (env, argv) => ({
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: 'fonts/[name].[ext]',
+                        name: '[name].[ext]',
+                        publicPath: '../assets/fonts/'
                     }
                 },
             }

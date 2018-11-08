@@ -12,6 +12,7 @@ module.exports = (env, argv) => ({
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
         filename: 'js/main.js'
     },
     devtool: 'cheap-module-source-map',
@@ -32,7 +33,7 @@ module.exports = (env, argv) => ({
                 use: [{
                     loader: 'html-loader',
                     options: {
-                        minimize: false // just for debugging
+                        minimize: argv.mode === 'production' ? true : false
                     }
                 }]
             },
@@ -53,7 +54,7 @@ module.exports = (env, argv) => ({
                             sourceMap: true,
                             config: {
                                 path: './postcss.config.js',
-                                ctx: { env: this.mode }
+                                ctx: { env: argv.mode }
                             },
                         }
                     },
@@ -68,7 +69,8 @@ module.exports = (env, argv) => ({
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: 'fonts/[name].[ext]',
+                        name: '[name].[ext]',
+                        outputPath: 'assets/fonts/'
                     }
                 },
             }
